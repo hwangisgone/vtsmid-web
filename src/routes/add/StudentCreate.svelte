@@ -1,7 +1,6 @@
 <script lang='ts'>
   import StudentInput from '../common/StudentInput.svelte';
   import { createStudent } from '../common/api.ts';
-  import { rerunLoadFunc } from '../common/utils.ts';
 
   import { currentModal } from '$lib/stores.ts';
 
@@ -16,7 +15,7 @@
 
 <div class="flex w-full justify-end pt-4">
   <button class="btn btn-sm btn-success" 
-    on:click={() => { createStudent(student); $currentModal.close(); rerunLoadFunc(); } }>
+    on:click={() => { createStudent(student); $currentModal.close(); } }>
     Confirm
   </button>
 </div>

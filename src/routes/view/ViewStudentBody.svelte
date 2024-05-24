@@ -9,6 +9,13 @@
 	let studentDisplayModal;
 	let selectedIndex = 0;
 
+	function recheckIndexOutOfBound(studentList) {
+		if (selectedIndex >= studentList.length) {
+			selectedIndex = studentList.length - 1;
+		}
+	}
+	$: recheckIndexOutOfBound(studentList);
+
 	function handleMouseOver(i) {
 		// THIS IS A LOT MORE EFFICIENT THAN SVELTE class:active (DOESN'T LAG)
 		// document.getElementById(`row-${rowfocus}`).classList.remove("active");
@@ -17,7 +24,9 @@
 </script>
 
 <StudentModal bind:this={studentDisplayModal}>
-	<StudentDisplay student={studentList[selectedIndex]}/>
+	{#if selectedIndex >= 0}
+		<StudentDisplay student={studentList[selectedIndex]}/>
+	{/if}
 </StudentModal>
 
 {#each studentList as student, i}

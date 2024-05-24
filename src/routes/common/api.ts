@@ -1,5 +1,7 @@
 import toast from 'svelte-french-toast';
 
+import { rerunLoadFunc } from '../common/utils.ts';
+
 const url = 'http://localhost:3000';
 
 export async function getStudent(student_id) {
@@ -28,6 +30,7 @@ export async function createStudent(student) {
 		if (res.status == 200) {
 			console.log(json);
 			toast.success("Student created!");
+			rerunLoadFunc();
 		} else {
 			throw json;
 		}
@@ -51,6 +54,7 @@ export async function updateStudent(student) {
 		if (res.status == 200) {
 			console.log(json);
 			toast.success("Student updated!");
+			rerunLoadFunc();
 		} else {
 			throw json;
 		}
@@ -70,6 +74,7 @@ export async function deleteStudent(student_id) {
 		if (res.status == 200) {
 			console.log(json);
 			toast.success("Student deleted!");
+			rerunLoadFunc();
 		} else {
 			throw json;
 		}

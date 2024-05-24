@@ -3,27 +3,27 @@
   import TrashSolid from 'svelte-awesome-icons/TrashSolid.svelte';
 
   import StudentInput from '../common/StudentInput.svelte';
-  import { updateStudent } from '../common/api.ts';
-  import { getGender, rerunLoadFunc } from '../common/utils.ts';
+  import { updateStudent, deleteStudent } from '../common/api.ts';
+  import { getGender  } from '../common/utils.ts';
 
   import { currentModal } from '$lib/stores.ts';
   
   export let student = {};
   export let updateState = false;
-
 </script>
 
 <div class="md:flex justify-between pb-4">
   <h3 class="font-bold text-xl pb-4">{[student.last_name, student.middle_name, student.first_name].join(" ")}</h3>
 
-  <div class="md:flex gap-4">
+  <div class="flex gap-2">
   {#if !updateState}
     <button class="btn btn-sm btn-info"
       on:click={() => updateState = true}>
       <PenToSquareSolid size="16"/>
       Update
     </button>
-    <button class="btn btn-sm btn-error">
+    <button class="btn btn-sm btn-error"
+      on:click={() => { $currentModal.close(); deleteStudent(student.student_id); updateState = false; } }>
       <TrashSolid size="16"/>
       Delete
     </button>
@@ -34,7 +34,7 @@
       Cancel
     </button>
     <button class="btn btn-sm btn-success" 
-      on:click={() => { updateState = false; updateStudent(student); $currentModal.close(); rerunLoadFunc(); } }>
+      on:click={() => { updateState = false; updateStudent(student); $currentModal.close(); } }>
       Confirm
     </button>
   {/if}
