@@ -1,15 +1,19 @@
 <script lang='ts'>
-  export function showModal() {
-    student_info_modal.showModal();
-  }
-
   import StudentDisplay from './StudentDisplay.svelte';
-  export let student = {};
+
+  let student = {};
+  let updateState = false;
+
+  export function showModal(in_student) {
+    student_info_modal.showModal();
+    updateState = false;
+    student = in_student;
+  }
 </script>
 
 <dialog id="student_info_modal" class="modal">
   <div class="modal-box !max-w-full !w-1/2">
-    <StudentDisplay {student}/>
+    <StudentDisplay {student} bind:updateState />
   </div>
 
   <form method="dialog" class="modal-backdrop">

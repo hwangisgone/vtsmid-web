@@ -7,7 +7,7 @@
 		// 	position: "bottom-left",
 		// },
 		error: {
-			duration: 10000,	// 10 seconds
+			duration: 8000,	// 8 seconds
 			// position: "bottom-right",
 		},  
 	};

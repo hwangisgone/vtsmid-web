@@ -1,15 +1,25 @@
 <script lang='ts'>
-  import { getGender } from './utils.ts';
   import PenToSquareSolid from 'svelte-awesome-icons/PenToSquareSolid.svelte';
   import TrashSolid from 'svelte-awesome-icons/TrashSolid.svelte';
 
+  import { getGender, loadingDisplay } from './utils.ts';
+  import StudentInput from './StudentInput.svelte';
+
   export let student = {};
+  export let updateState = false;
+
+
+
+
 </script>
 
-<div class="flex justify-between">
+<div class="md:flex justify-between pb-4">
   <h3 class="font-bold text-xl pb-4">{[student.last_name, student.middle_name, student.first_name].join(" ")}</h3>
-  <div class="flex gap-2">
-    <button class="btn btn-sm btn-info">
+
+  {#if !updateState}
+    <div class="md:flex gap-2">
+    <button class="btn btn-sm btn-info"
+      on:click={() => updateState = true}>
       <PenToSquareSolid size="16"/>
       Update
     </button>
@@ -17,8 +27,22 @@
       <TrashSolid size="16"/>
       Delete
     </button>
-  </div>
+    </div>
+  {/if}
 </div>
+
+
+{#if updateState}
+
+<StudentInput bind:student />
+<div class="flex w-full justify-end pt-4">
+  <button class="btn btn-sm btn-success" 
+    on:click={() => loadingDisplay(updateStudent)}>
+    Confirm
+  </button>
+</div>
+
+{:else}
 
 <div class="grid grid-cols-3 gap-2 student-table">
   <span>Email:</span>
@@ -33,17 +57,19 @@
   <span>Last name:</span>
   <p>{student.last_name}</p>
 
-  <span>Gender</span>
+  <span>Gender:</span>
   <p>{getGender(student.sex)}</p>
   <span>Birth year:</span>
-  <p>{student.birth_year}</p>
+  <p>{student.birth_year || "Not provided"}</p>
   <span>School:</span>
   <p>{student.school}</p>
   <span>Country:</span>
   <p>{student.country_name}</p>
-  <span></span><p class="py-4">Press ESC key or click outside to close</p>
 </div>
 
+{/if}
+
+<p class="pt-4 text-center text-base-content">Press ESC key or click outside to close</p>
 
 
 <style>
