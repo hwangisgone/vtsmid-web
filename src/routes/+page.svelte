@@ -1,28 +1,13 @@
 <script lang='ts'>
-	import StudentModal from './StudentModal.svelte';
-	import AddStudent from './AddStudent.svelte';
-
-	import { getGender } from './utils.ts';
-
+	import AddStudentBtn from './add/AddStudentBtn.svelte';
+	import ViewStudentBody from './view/ViewStudentBody.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-	const studentList = data.students;
+	$: studentList = data.students;
 
-
-
-	let studentModal;
-	let selected = 0;
-
-	function handleMouseOver(i) {
-		// THIS IS A LOT MORE EFFICIENT THAN SVELTE class:active (DOESN'T LAG)
-		// document.getElementById(`row-${rowfocus}`).classList.remove("active");
-		selected = i;
-		// document.getElementById(`row-${rowfocus}`).classList.add("active");
-	}
 </script>
 
-<StudentModal bind:this={studentModal}/>
 
 <div class="min-h-full m-12" >
 
@@ -41,21 +26,12 @@
 	    </thead>
 	    <tbody>
 	      <!-- row 1 -->
-	      {#each studentList as student, i}
-	      <tr class="hover" on:click={() => studentModal.showModal(studentList[selected])} 
-	      		on:mouseover={() => handleMouseOver(i)}
-	      		on:focus={() => handleMouseOver(i)}>
-	        <td>{i+1}</td>
-	        <td>{[student.last_name, student.middle_name, student.first_name].join(" ")}</td>
-	        <td>{getGender(student.sex)}</td>
-	        <td>{student.school}</td>
-	      </tr>
-	      {/each}
+	      <ViewStudentBody {studentList} />
 	    </tbody>
 	  </table>
 	</div>
 
 	<div class="flex justify-center">
-		<AddStudent />
+		<AddStudentBtn />
 	</div>
 </div>

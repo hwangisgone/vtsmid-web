@@ -16,7 +16,7 @@
   // console.log(student.country_id);
 </script>
 
-<div class="grid grid-cols-3 gap-2 student-table">
+<div class="grid grid-cols-3 gap-2 student-table text-base">
 
 <span>Email:</span>
 <input type="email" bind:value={student.email} />

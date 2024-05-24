@@ -6,6 +6,8 @@ export async function load({ fetch }) {
         // Fetch data from an API endpoint
         const response = await fetch('http://localhost:3000/api/student');
         studentList = await response.json();
+
+        // console.log("Student list loaded");
     } catch (e) {
         console.error(e);
         toast.error("Failed to get student list");
