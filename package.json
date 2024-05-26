@@ -29,7 +29,7 @@
 	},
 	"overrides": {
 		"rimraf": "^4.0.0",
-		"glob": "^8.0.0"
+		"glob": "^9.0.0"
 	},
 	"type": "module",
 	"dependencies": {
